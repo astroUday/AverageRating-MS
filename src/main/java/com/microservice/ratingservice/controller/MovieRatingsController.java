@@ -2,7 +2,7 @@ package com.microservice.ratingservice.controller;
 
 import com.microservice.ratingservice.dto.MovieRatingsResponseDto;
 import com.microservice.ratingservice.dto.RatingsRequestDto;
-import com.microservice.ratingservice.service.AverageRatingService;
+import com.microservice.ratingservice.service.AverageRatingsService;
 import com.microservice.ratingservice.service.RatingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("${server.servlet.context-path}"+"/movie/")
 @RequiredArgsConstructor
 public class MovieRatingsController {
-    private final AverageRatingService ratingService;
+    private final AverageRatingsService ratingService;
     private final RatingService service;
 
     @GetMapping("{movieId}")
@@ -25,7 +25,7 @@ public class MovieRatingsController {
         return (ratingService.addMovie(movieId))? ResponseEntity.status(HttpStatus.CREATED).body("Created"): ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Please check input values correctly");
     }
     @PostMapping("test")
-    public ResponseEntity testApi(@RequestBody RatingsRequestDto ratingsRequestDto) throws InterruptedException {
+    public ResponseEntity testApi(@RequestBody RatingsRequestDto ratingsRequestDto) {
         return ResponseEntity.ok(service.checkIfValidRequest(ratingsRequestDto));
     }
 }

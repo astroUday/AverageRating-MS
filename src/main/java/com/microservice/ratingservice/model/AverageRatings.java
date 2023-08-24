@@ -1,9 +1,6 @@
 package com.microservice.ratingservice.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -26,4 +23,7 @@ public class AverageRatings {
     @Min(value = 0,message = "Ratings cannot be negative")
     @Max(value = 5,message = "Maximum value for a rating is 5")
     private Double averageRating;
+    private Long numberOfRatings;
+    @Version
+    private Long version;
 }

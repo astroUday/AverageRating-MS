@@ -14,19 +14,19 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientRequestException;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
 
+import static com.microservice.ratingservice.config.WebclientConfig.webclient;
+
 @Service
 @RequiredArgsConstructor
 public class RatingService {
     private final RatingRepo ratingRepo;
     private final AveraegeRatingsRepo averaegeRatingsRepo;
-    private final WebClient.Builder webClientBuilder;
     private static final String X="This request cannot be processed due to bad input values";
 
     ObjectMapper objectMapper=new ObjectMapper();
@@ -88,8 +88,8 @@ public class RatingService {
         return ratings;
     }
 
-    public <T> Mono<T> fetchDataFromService(String baseUrl, String uri, Class<T> responseType) {
-        return webClientBuilder
+    public static <T> Mono<T> fetchDataFromService(String baseUrl, String uri, Class<T> responseType) {
+        return webclient()
                 .baseUrl(baseUrl)
                 .build()
                 .get()

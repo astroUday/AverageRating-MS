@@ -9,7 +9,11 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class MovieRatingsResponseDto {
-    private Double averageRating;
-    private boolean b;
+public class ConsumerDto {
+
+    private Integer userId;
+    private String movieId;
+    private Integer rating;
+    private Integer difference;
+
 }
