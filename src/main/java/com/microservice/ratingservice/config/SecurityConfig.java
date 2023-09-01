@@ -19,7 +19,7 @@ public class SecurityConfig {
         http.csrf(csrf->csrf.disable());
         http.cors(cors->cors.disable());
         http.sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-        http.authorizeHttpRequests(request->request.requestMatchers("/api/v1/rating-service/actuator/**").permitAll().anyRequest().authenticated());
+        http.authorizeHttpRequests(request->request.requestMatchers("/api/v1/rating-service/actuator/**").permitAll().anyRequest().permitAll());
         http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }

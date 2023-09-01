@@ -24,7 +24,8 @@ import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 public class CustomAuthorizationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        if(request.getServletPath().equals("/api/user/login")||request.getServletPath().equals("/api/user") || request.getServletPath().contains("actuator")) {
+        if(request.getServletPath().equals("/api/user/login")||request.getServletPath().equals("/api/user") || request.getServletPath().contains("actuator")
+        || request.getServletPath().contains("/")) {
             filterChain.doFilter(request, response);
             return;
         }

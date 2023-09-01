@@ -48,12 +48,12 @@ public class UpdateListner {
 
             if(completableFutureFuture!=null && completableFutureFuture.get()!=null){
                 map.put("Authorization",request.getHeader("Authorization"));
-                service.sendDataToRetryTopic(AverageRatingsService.MovieServiceBaseUrl,"kafka/retryUpdateTopic", ResponseEntity.class,map);
+                AverageRatingsService.sendDataToRetryTopic(AverageRatingsService.MovieServiceBaseUrl,"kafka/retryUpdateTopic", ResponseEntity.class,map);
             }
         } catch (InterruptedException | ExecutionException e){
             e.printStackTrace();
         }
 
-        acknowledgment.acknowledge();     // processed completely/partially
+        acknowledgment.acknowledge();     // processed the data completely/partially
     }
 }

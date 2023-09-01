@@ -46,16 +46,15 @@ public class CreateListner {
         try {
             CompletableFuture<List<ConsumerRecord<Integer,String>>> completableFutureFuture = completableFuture.get();
 
-            if(completableFutureFuture!=null && completableFutureFuture.get()!=null){
+            if(completableFutureFuture!=null && completableFutureFuture.get()!=null){       // send messages to retry topic
                 map.put("Authorization",request.getHeader("Authorization"));
-                service.sendDataToRetryTopic(AverageRatingsService.MovieServiceBaseUrl,"kafka/retryCreateTopic", ResponseEntity.class,map);
+                AverageRatingsService.sendDataToRetryTopic(AverageRatingsService.MovieServiceBaseUrl,"kafka/retryCreateTopic", ResponseEntity.class,map);
             }
         } catch (InterruptedException | ExecutionException e){
             e.printStackTrace();
         }
 
-        acknowledgment.acknowledge();     // processed completely/partially
-
+        acknowledgment.acknowledge();     // processed the data completely/partially
     }
 }
 

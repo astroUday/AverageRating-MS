@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("${server.servlet.context-path}"+"/movie/")
+@RequestMapping("/movie/")
 @RequiredArgsConstructor
 public class MovieRatingsController {
     private final AverageRatingsService ratingService;
